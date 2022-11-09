@@ -1,5 +1,7 @@
 package com.alfredo.juego;
 
+import javafx.geometry.Pos;
+import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -13,6 +15,7 @@ public class ViewGame extends BorderPane {
     private StackPane court;
 
     private Rectangle wallLeft, wallRight, wallUp, wallDown;
+    private Label scoreLeft, scoreRight;
 
     public ViewGame() {
         this.court = new StackPane();
@@ -31,7 +34,6 @@ public class ViewGame extends BorderPane {
         /*this.racketRight.heightProperty().bind(this.heightProperty().divide(10));
         this.racketRight.widthProperty().bind(this.heightProperty().divide(40));*/
         this.racketRight.setFill(Color.RED);
-
 
 
         this.ball = new Circle();
@@ -60,14 +62,23 @@ public class ViewGame extends BorderPane {
         this.wallUp.setFill(Color.GREEN);
 
 
-        this.wallDown = new Rectangle(15,10);
+        this.wallDown = new Rectangle(15, 10);
         this.wallDown.heightProperty().bind(wallRight.widthProperty());
         this.wallDown.widthProperty().bind(court.widthProperty());
         this.wallDown.translateYProperty().bind(court.heightProperty().divide(2));
         this.wallDown.setFill(Color.CHOCOLATE);
 
-        controller = new GameController(court,racketLeft, racketRight,ball, wallLeft, wallRight, wallUp, wallDown);
-        this.court.getChildren().addAll(wallRight,wallLeft,wallUp,wallDown,racketLeft,racketRight,ball);
+        this.scoreLeft = new Label("0 points");
+        this.scoreLeft.setTextFill(Color.WHITE);
+        court.setAlignment(scoreLeft, Pos.BOTTOM_LEFT);
+
+
+        this.scoreRight = new Label("0 points");
+        this.scoreRight.setTextFill(Color.WHITE);
+        court.setAlignment(scoreRight, Pos.TOP_RIGHT);
+
+        controller = new GameController(court, racketLeft, racketRight, ball, wallLeft, wallRight, wallUp, wallDown, scoreLeft, scoreRight);
+        this.court.getChildren().addAll(wallRight, wallLeft, wallUp, wallDown, racketLeft, racketRight, ball, scoreLeft, scoreRight);
         this.setCenter(court);
     }
 }

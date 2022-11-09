@@ -17,7 +17,7 @@ public class GameController {
     private Rectangle wallLeft, wallRight, wallUp, wallDown;
     private Timeline animation;
     private Label scoreLeft, scoreRight;
-    private int scoreLeftInt = 0, scoreLeftRightInt = 0;
+    private int scoreLeftInt = 0, scoreRightInt = 0;
 
 
     private double ballSpeed = 1;
@@ -29,7 +29,7 @@ public class GameController {
     private boolean funcionando = true;
 
 
-    public GameController(StackPane court, Rectangle racketLeft, Rectangle racketRight, Circle ball, Rectangle wallLeft, Rectangle wallRight, Rectangle wallUp, Rectangle wallDown) {
+    public GameController(StackPane court, Rectangle racketLeft, Rectangle racketRight, Circle ball, Rectangle wallLeft, Rectangle wallRight, Rectangle wallUp, Rectangle wallDown, Label scoreLeft, Label scoreRight) {
         this.court = court;
         this.racketLeft = racketLeft;
         this.racketRight = racketRight;
@@ -38,6 +38,8 @@ public class GameController {
         this.wallRight = wallRight;
         this.wallUp = wallUp;
         this.wallDown = wallDown;
+        this.scoreLeft =scoreLeft;
+        this.scoreRight=scoreRight;
 
 
         initGame();
@@ -113,14 +115,16 @@ public class GameController {
             left = true;
             ballSpeed += 0.5;
         }
-        if (ball.getBoundsInParent().intersects(wallLeft.getBoundsInParent())){
-            ballSpeed=1;
+        if (ball.getBoundsInParent().intersects(wallLeft.getBoundsInParent())) {
+            scorePoints('L');
+            ballSpeed = 1;
             ball.setTranslateX(0);
             ball.setTranslateY(0);
             animation.stop();
         }
-        if(ball.getBoundsInParent().intersects(wallRight.getBoundsInParent())){
-            ballSpeed=1;
+        if (ball.getBoundsInParent().intersects(wallRight.getBoundsInParent())) {
+            scorePoints('R');
+            ballSpeed = 1;
             ball.setTranslateX(0);
             ball.setTranslateY(0);
             animation.stop();
@@ -144,6 +148,17 @@ public class GameController {
             ball.setTranslateX(ball.getTranslateX() - ballSpeed);
             ball.setTranslateY(ball.getTranslateY() - ballSpeed);
 
+        }
+    }
+
+    private void scorePoints(char jugador) {
+        if (jugador == 'I') {
+            scoreLeftInt++;
+            scoreLeft.setText(scoreLeftInt + " points");
+        }
+        else {
+            scoreRightInt++;
+            scoreRight.setText(scoreRightInt + " points");
         }
     }
 }
