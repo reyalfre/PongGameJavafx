@@ -102,14 +102,28 @@ public class GameController {
         if (ball.getBoundsInParent().intersects(wallUp.getBoundsInParent())) {
             up = false;
             down = true;
-        }if (ball.getBoundsInParent().intersects(racketLeft.getBoundsInParent())){
-            right=true;
-            left=false;
-            ballSpeed+=0.5;
-        }if (ball.getBoundsInParent().intersects(racketRight.getBoundsInParent())){
-            right=false;
-            left=true;
-            ballSpeed+=0.5;
+        }
+        if (ball.getBoundsInParent().intersects(racketLeft.getBoundsInParent())) {
+            right = true;
+            left = false;
+            ballSpeed += 0.5;
+        }
+        if (ball.getBoundsInParent().intersects(racketRight.getBoundsInParent())) {
+            right = false;
+            left = true;
+            ballSpeed += 0.5;
+        }
+        if (ball.getBoundsInParent().intersects(wallLeft.getBoundsInParent())){
+            ballSpeed=1;
+            ball.setTranslateX(0);
+            ball.setTranslateY(0);
+            animation.stop();
+        }
+        if(ball.getBoundsInParent().intersects(wallRight.getBoundsInParent())){
+            ballSpeed=1;
+            ball.setTranslateX(0);
+            ball.setTranslateY(0);
+            animation.stop();
         }
     }
 
