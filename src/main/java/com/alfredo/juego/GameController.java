@@ -95,6 +95,22 @@ public class GameController {
         if (racketRight.getBoundsInParent().intersects(wallDown.getBoundsInParent())) {
             racketRight.setTranslateY(racketRight.getTranslateY() - 4);
         }
+        if (ball.getBoundsInParent().intersects(wallDown.getBoundsInParent())) {
+            up = true;
+            down = false;
+        }
+        if (ball.getBoundsInParent().intersects(wallUp.getBoundsInParent())) {
+            up = false;
+            down = true;
+        }if (ball.getBoundsInParent().intersects(racketLeft.getBoundsInParent())){
+            right=true;
+            left=false;
+            ballSpeed+=0.5;
+        }if (ball.getBoundsInParent().intersects(racketRight.getBoundsInParent())){
+            right=false;
+            left=true;
+            ballSpeed+=0.5;
+        }
     }
 
     private void moveBall() {
@@ -102,13 +118,13 @@ public class GameController {
             ball.setTranslateX(ball.getTranslateX() + ballSpeed);
             ball.setTranslateY(ball.getTranslateY() + ballSpeed);
 
-        } else if (down && right) {
+        } else if (down && left) {
             ball.setTranslateX(ball.getTranslateX() - ballSpeed);
             ball.setTranslateY(ball.getTranslateY() + ballSpeed);
 
-        } else if (up && left) {
+        } else if (up && right) {
             ball.setTranslateX(ball.getTranslateX() + ballSpeed);
-            ball.setTranslateY(ball.getTranslateY() + ballSpeed);
+            ball.setTranslateY(ball.getTranslateY() - ballSpeed);
 
         } else if (up && left) {
             ball.setTranslateX(ball.getTranslateX() - ballSpeed);
