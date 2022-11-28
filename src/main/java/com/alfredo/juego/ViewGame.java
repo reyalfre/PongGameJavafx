@@ -1,12 +1,12 @@
 package com.alfredo.juego;
 
 import javafx.geometry.Pos;
-import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 
 public class ViewGame extends BorderPane {
     private GameController controller;
@@ -15,7 +15,7 @@ public class ViewGame extends BorderPane {
     private StackPane court;
 
     private Rectangle wallLeft, wallRight, wallUp, wallDown;
-    private Label scoreLeft, scoreRight;
+    private Text scoreLeft, scoreRight;
 
     public ViewGame() {
         this.court = new StackPane();
@@ -68,13 +68,17 @@ public class ViewGame extends BorderPane {
         this.wallDown.translateYProperty().bind(court.heightProperty().divide(2));
         this.wallDown.setFill(Color.CHOCOLATE);
 
-        this.scoreLeft = new Label("0 points");
-        this.scoreLeft.setTextFill(Color.WHITE);
-        court.setAlignment(scoreLeft, Pos.BOTTOM_LEFT);
+        this.scoreLeft = new Text("0 points");
+        this.scoreLeft.setFill(Color.WHITE);
+        // court.setAlignment(scoreLeft, Pos.BOTTOM_LEFT);
+
+        this.scoreLeft.translateYProperty().bind(court.heightProperty().divide(2));
+        this.scoreLeft.translateXProperty().bind(court.widthProperty().divide(-2.5));
+        //this.scoreLeft.translateXProperty().bind();
 
 
-        this.scoreRight = new Label("0 points");
-        this.scoreRight.setTextFill(Color.WHITE);
+        this.scoreRight = new Text("0 points");
+        this.scoreRight.setFill(Color.WHITE);
         court.setAlignment(scoreRight, Pos.TOP_RIGHT);
 
         controller = new GameController(court, racketLeft, racketRight, ball, wallLeft, wallRight, wallUp, wallDown, scoreLeft, scoreRight);
